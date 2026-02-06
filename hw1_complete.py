@@ -137,6 +137,10 @@ def build_model50k():
 
 # In[9]:
 
+model1 = build_model1()
+model2 = build_model2()
+model3 = build_model3()
+model50k = build_model50k()
 
 if __name__ == '__main__':
     # 1. Load Data
