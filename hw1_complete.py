@@ -1,10 +1,4 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#!/usr/bin/env python
 
 # TensorFlow and tf.keras
 import tensorflow as tf
@@ -16,10 +10,6 @@ import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import image
-
-
-# In[7]:
-
 
 def build_model1():
     """4-layer fully-connected model"""
@@ -37,10 +27,6 @@ def build_model1():
         metrics=['accuracy']
     )
     return model
-
-
-# In[8]:
-
 
 def build_model2():
     """Convolutional Neural Network"""
@@ -72,10 +58,6 @@ def build_model2():
     )
     return model
 
-
-# In[14]:
-
-
 def build_model3():
     """Seperable Convolutional Neural Network"""
     model = Sequential([
@@ -106,10 +88,6 @@ def build_model3():
     )
     return model
 
-
-# In[26]:
-
-
 def build_model50k():
     """Best Model with 50k Parameter Limit"""
     model = Sequential([
@@ -133,10 +111,6 @@ def build_model50k():
         metrics=['accuracy']
     )
     return model
-
-
-# In[9]:
-
 
 if __name__ == '__main__':
     # 1. Load Data
@@ -167,99 +141,45 @@ if __name__ == '__main__':
     test_loss1, test_acc1 = model1.evaluate(test_images, test_labels)
     print(f"Model 1 Test Accuracy: {test_acc1}")
 
-
-# In[10]:
-
-
-model2 = build_model2()
-print(model2.summary())
-
-# Set verbose=1 to see progress, but remember to comment out plt.show()
-history2 = model2.fit(
-    train_images, train_labels, 
-    epochs=30, 
-    validation_data=(val_images, val_labels)
-)
-
-# Evaluate on test set
-test_loss2, test_acc2 = model1.evaluate(test_images, test_labels)
-print(f"Model 2 Test Accuracy: {test_acc2}")
-
-
-# In[15]:
-
-
-model3 = build_model3()
-print(model3.summary())
-
-# Set verbose=1 to see progress, but remember to comment out plt.show()
-history3 = model3.fit(
-    train_images, train_labels, 
-    epochs=30, 
-    validation_data=(val_images, val_labels)
-)
-
-# Evaluate on test set
-test_loss3, test_acc3 = model1.evaluate(test_images, test_labels)
-print(f"Model 3 Test Accuracy: {test_acc3}")
-
-
-# In[27]:
-
-
-model50k = build_model50k()
-print(model50k.summary())
-
-# Set verbose=1 to see progress, but remember to comment out plt.show()
-history50k = model50k.fit(
-    train_images, train_labels, 
-    epochs=30, 
-    validation_data=(val_images, val_labels)
-)
-
-# Evaluate on test set
-test_loss50k, test_acc50k = model1.evaluate(test_images, test_labels)
-print(f"Model 3 Test Accuracy: {test_acc50k}")
-
-
-# In[33]:
-
-
-test_img = np.array(tf.keras.utils.load_img(
-    'OneDrive/UNCC/ECGR4127/test_image.jpg',
-    grayscale=False,
-    color_mode='rgb',
-    target_size=(32, 32))
-)
-
-# 2. Preprocess the image
-# Scale pixels to [0, 1] and add the 'batch' dimension
-input_arr = test_img.astype('float32') / 255.0
-input_arr = np.expand_dims(input_arr, axis=0)  # Becomes (1, 32, 32, 3)
-
-# 3. Run the prediction
-# Use model2 (or whichever model you want to test)
-predictions = model3.predict(input_arr)
-
-# 4. Interpret the result
-# Since the model uses from_logits=True, we find the index of the highest logit
-predicted_class_idx = np.argmax(predictions[0])
-
-# CIFAR-10 class labels in order
-classes = ['airplane', 'automobile', 'bird', 'cat', 'deer', 
-           'dog', 'frog', 'horse', 'ship', 'truck']
-
-print(f"The model predicts this image is a: {classes[predicted_class_idx]}")
-
-
-# In[37]:
-
-
-model50k.save("best_model.h5")
-
-
-# In[ ]:
-
-
-
-
+    model2 = build_model2()
+    print(model2.summary())
+    
+    # Set verbose=1 to see progress, but remember to comment out plt.show()
+    history2 = model2.fit(
+        train_images, train_labels, 
+        epochs=30, 
+        validation_data=(val_images, val_labels)
+    )
+    
+    # Evaluate on test set
+    test_loss2, test_acc2 = model1.evaluate(test_images, test_labels)
+    print(f"Model 2 Test Accuracy: {test_acc2}")
+    
+    model3 = build_model3()
+    print(model3.summary())
+    
+    # Set verbose=1 to see progress, but remember to comment out plt.show()
+    history3 = model3.fit(
+        train_images, train_labels, 
+        epochs=30, 
+        validation_data=(val_images, val_labels)
+    )
+    
+    # Evaluate on test set
+    test_loss3, test_acc3 = model1.evaluate(test_images, test_labels)
+    print(f"Model 3 Test Accuracy: {test_acc3}")
+    
+    model50k = build_model50k()
+    print(model50k.summary())
+    
+    # Set verbose=1 to see progress, but remember to comment out plt.show()
+    history50k = model50k.fit(
+        train_images, train_labels, 
+        epochs=30, 
+        validation_data=(val_images, val_labels)
+    )
+    
+    # Evaluate on test set
+    test_loss50k, test_acc50k = model1.evaluate(test_images, test_labels)
+    print(f"Model 3 Test Accuracy: {test_acc50k}")
+    model50k.save("best_model.h5")
