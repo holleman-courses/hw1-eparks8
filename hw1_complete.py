@@ -112,17 +112,11 @@ def build_model50k():
     )
     return model
 
-<<<<<<< HEAD
-=======
-
-# In[9]:
-
 model1 = build_model1()
 model2 = build_model2()
 model3 = build_model3()
 model50k = build_model50k()
 
->>>>>>> 60780f0dddd95790890cd5f2e627e1fe598fa593
 if __name__ == '__main__':
     # 1. Load Data
     (train_images, train_labels), (test_images, test_labels) = keras.datasets.cifar10.load_data()
