@@ -61,7 +61,7 @@ def build_model2():
 def build_model3():
     """Seperable Convolutional Neural Network"""
     model = Sequential([
-        layers.Conv2D(32,(3,3),strides=2,padding='same',activation='relu',input_shape=(32,32,3)),
+        layers.SeparableConv2D(32,(3,3),strides=2,padding='same',activation='relu',input_shape=(32,32,3)),
         layers.BatchNormalization(),
 
         layers.SeparableConv2D(64,(3,3),strides=2,padding='same',activation='relu'),
@@ -93,10 +93,13 @@ def build_model50k():
     model = Sequential([
         layers.Conv2D(32,(3,3),strides=2,padding='same',activation='relu',input_shape=(32,32,3)),
         layers.BatchNormalization(),
-
         layers.SeparableConv2D(64,(3,3),strides=2,padding='same',activation='relu'),
         layers.BatchNormalization(),
         layers.SeparableConv2D(64,(3,3),padding='same',activation='relu'),
+        layers.BatchNormalization(),
+        layers.SeparableConv2D(64,(3,3),strides=2,padding='same',activation='relu'),
+        layers.BatchNormalization(),
+        layers.SeparableConv2D(64,(3,3),strides=2,padding='same',activation='relu'),
         layers.BatchNormalization(),
         layers.SeparableConv2D(64,(3,3),strides=2,padding='same',activation='relu'),
         layers.BatchNormalization(),
